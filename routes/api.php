@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/', function (Request $request) {
+    return response()->json(['code' => '200', 'status' => true]);
+});
+
+Route::group(['prefix' => 'products'], function(){
+    Route::get('/', 'App\Http\Controllers\ProductsController@list');
+    Route::get('/{product}', 'App\Http\Controllers\ProductsController@get');
+});
